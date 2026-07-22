@@ -1,0 +1,21 @@
+{
+  "name": "cybervault-server",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "dev": "nodemon app.js"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
+    "express": "^4.19.4",
+    "express-session": "^1.17.4",
+    "sqlite": "^5.1.1",
+    "sqlite3": "^5.1.6"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.4"
+  }
+}

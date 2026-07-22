@@ -1,0 +1,5 @@
+node_modules/
+server/database/*.sqlite
+client/dist/
+**/*.log
+.DS_Store
