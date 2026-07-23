@@ -3,6 +3,7 @@ import { fileURLToPath } from 'url';
 import sqlite3 from 'sqlite3';
 import { open } from 'sqlite';
 import { hashPassword, getSeedPassword, verifyPassword } from '../utils/password.js';
+import { getEncodedCredentialList } from '../utils/fakePasswords.js';
 import { getFakePasswordHints } from '../utils/fakePasswords.js';
 
 const ROT13_PASSWORD_LIST = [
@@ -59,9 +60,9 @@ const init = async () => {
     }
   }
 
-  // Fake ROT13 password list included for challenge purposes only.
-  const fakePasswordHints = getFakePasswordHints();
-  console.log('Fake password list (ROT13):', fakePasswordHints.join(', '));
+  // Fake ROT13 credential list included for challenge purposes only.
+  const fakeCreds = getEncodedCredentialList();
+  console.log('Fake credential list (ROT13 username:password):', fakeCreds.join(', '));
 
   await db.close();
 };

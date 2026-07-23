@@ -22,17 +22,56 @@ export const ROT13_PASSWORD_LIST = [
   'CloYngkn!@#',
 ];
 
-export const decodeRot13 = (value) =>
+// Simple ROT13 implementation (symmetric)
+export const rot13 = (value) =>
   value.replace(/[A-Za-z]/g, (char) => {
     const charCode = char.charCodeAt(0);
     const offset = charCode >= 97 ? 97 : 65;
     return String.fromCharCode(((charCode - offset + 13) % 26) + offset);
   });
 
-export const getDecodedPasswordList = () => ROT13_PASSWORD_LIST.map(decodeRot13);
+// Example usernames (decoded). We'll encode them at runtime and pair with the encoded password list.
+export const USERNAMES = [
+  'alice',
+  'bob',
+  'charlie',
+  'devnull',
+  'agentx',
+  'eve',
+  'mallory',
+  'trent',
+  'peggy',
+  'oscar',
+  'victor',
+  'walter',
+  'heidi',
+  'judy',
+  'ray',
+  'sam',
+  'kim',
+  'lee',
+  'pat',
+  'mike',
+  'zoe',
+];
+
+// Build an encoded credential list: ROT13(username):ROT13(password)
+export const getEncodedCredentialList = () =>
+  USERNAMES.map((u, i) => `${rot13(u)}:${ROT13_PASSWORD_LIST[i % ROT13_PASSWORD_LIST.length]}`);
+
+// Decode credential entries into decoded "username:password" strings
+export const getDecodedCredentialList = () => getEncodedCredentialList().map((s) => rot13(s));
 
 export const getHiddenSeedPassword = () => {
-  const decoded = getDecodedPasswordList();
-  // This list contains 20 ROT13-encoded passwords. The real seed password is hidden among them.
-  return decoded.find((item) => item.startsWith('Cyb3rVault')) || 'Cyb3rVault!2026$Seed';
+  const decoded = getDecodedCredentialList();
+  for (const item of decoded) {
+    const parts = item.split(':');
+    if (parts.length >= 2) {
+      const password = parts.slice(1).join(':');
+      if (password && password.startsWith('Cyb3rVault')) {
+        return password;
+      }
+    }
+  }
+  return 'Cyb3rVault!2026$Seed';
 };
