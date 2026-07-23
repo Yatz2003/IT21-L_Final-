@@ -40,12 +40,12 @@ const Login = () => {
 
   return (
     <div className="mx-auto flex min-h-[calc(100vh-160px)] max-w-6xl items-center justify-center px-4 py-6">
-      <div className="relative w-full max-w-2xl overflow-hidden rounded-3xl border border-[#0f172a] bg-[#101728]/90 p-2 text-[#E5F1FF] shadow-[0_0_40px_rgba(0,245,255,0.08)] backdrop-blur-xl sm:p-8">
+      <div className="relative w-full max-w-2xl overflow-hidden rounded-3xl border border-[#0f172a] bg-[#101728]/90 p-3 text-[#E5F1FF] shadow-[0_0_40px_rgba(0,245,255,0.08)] backdrop-blur-xl sm:p-8">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(0,245,255,0.18),_transparent_35%),radial-gradient(circle_at_bottom_right,_rgba(0,255,153,0.14),_transparent_28%)]" />
         <div className="relative space-y-8">
           <div className="space-y-4">
             <div className="text-[#00F5FF]">
-              <h1 className="text-[10px] font-semibold uppercase tracking-[0em] sm:text-4xl sm:tracking-[0.36em] text-center leading-tight break-words">CyberVault</h1>
+              <h1 className="text-base font-semibold uppercase tracking-tight sm:text-4xl sm:tracking-[0.36em] text-center leading-tight break-words">CyberVault</h1>
               <p className="text-sm text-[#7da0c7]">Secure access begins with a careful eye.</p>
             </div>
             <p className="text-sm text-[#8db4d4]">Hint: a real credential is concealed among several decoy entries.</p>
