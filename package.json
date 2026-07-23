@@ -1,0 +1,11 @@
+{
+  "name": "it21-l-final",
+  "private": true,
+  "scripts": {
+    "build": "cd cybervault/client && yarn install && yarn build",
+    "start": "cd cybervault/server && yarn install && yarn start"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
