@@ -11,7 +11,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchStatus = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/auth/dashboard', {
+        const response = await fetch('/api/auth/dashboard', {
           credentials: 'include',
         });
         const data = await response.json();
@@ -29,7 +29,7 @@ const Dashboard = () => {
   }, [navigate]);
 
   const handleLogout = async () => {
-    await fetch('http://localhost:5000/api/auth/logout', {
+    await fetch('/api/auth/logout', {
       method: 'POST',
       credentials: 'include',
     });

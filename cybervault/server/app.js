@@ -12,9 +12,14 @@ const app = express();
 const clientDistPath = path.join(__dirname, '../client/dist');
 
 app.use(express.json());
+const allowedOrigins = ['http://localhost:5173', 'https://thisislabs.onrender.com'];
+if (process.env.CLIENT_URL) {
+  allowedOrigins.push(process.env.CLIENT_URL);
+}
+
 app.use(
   cors({
-    origin: ['http://localhost:5173', 'https://thisislabs.onrender.com'],
+    origin: allowedOrigins,
     credentials: true,
   })
 );
