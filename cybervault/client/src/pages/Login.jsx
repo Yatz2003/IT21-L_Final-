@@ -45,7 +45,7 @@ const Login = () => {
         <div className="relative space-y-8">
           <div className="space-y-4">
             <div className="text-[#00F5FF]">
-              <h1 className="text-2xl font-semibold uppercase tracking-[0.12em] sm:text-4xl sm:tracking-[0.36em] text-center">CyberVault</h1>
+              <h1 className="text-xl font-semibold uppercase tracking-[0.04em] sm:text-4xl sm:tracking-[0.36em] text-center leading-tight break-words">CyberVault</h1>
               <p className="text-sm text-[#7da0c7]">Secure access begins with a careful eye.</p>
             </div>
             <p className="text-sm text-[#8db4d4]">Hint: The password is hidden inside a list of decoys; the right entry is the one that looks like it belongs.</p>
