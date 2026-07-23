@@ -1,5 +1,5 @@
 import { findUserByUsername } from '../models/userModel.js';
-import bcrypt from 'bcrypt';
+import { verifyPassword } from '../utils/password.js';
 
 export const loginUser = async (req, res) => {
   const { username, password } = req.body;
@@ -9,7 +9,7 @@ export const loginUser = async (req, res) => {
     return res.status(401).json({ message: 'Access denied. Invalid credentials.' });
   }
 
-  const passwordMatch = await bcrypt.compare(password, user.password_hash);
+  const passwordMatch = await verifyPassword(password, user.password_hash);
   if (!passwordMatch) {
     return res.status(401).json({ message: 'Access denied. Invalid credentials.' });
   }

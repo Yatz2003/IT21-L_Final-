@@ -5,7 +5,9 @@
   "type": "module",
   "main": "app.js",
   "scripts": {
-    "dev": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "build": "npm --prefix ../client install && npm --prefix ../client run build",
+    "start": "node app.js"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",

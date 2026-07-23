@@ -1,15 +1,20 @@
 import express from 'express';
 import session from 'express-session';
 import cors from 'cors';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import authRoutes from './routes/authRoutes.js';
 import './database/init.js';
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const app = express();
+const clientDistPath = path.join(__dirname, '../client/dist');
 
 app.use(express.json());
 app.use(
   cors({
-    origin: 'http://localhost:5173',
+    origin: ['http://localhost:5173', 'https://thisislabs.onrender.com'],
     credentials: true,
   })
 );
@@ -28,8 +33,14 @@ app.use(
 
 app.use('/api/auth', authRoutes);
 
-app.get('/', (req, res) => {
-  res.send({ status: 'CyberVault server running' });
+app.use(express.static(clientDistPath));
+
+app.get('*', (req, res, next) => {
+  if (req.path.startsWith('/api/')) {
+    return next();
+  }
+
+  res.sendFile(path.join(clientDistPath, 'index.html'));
 });
 
 const PORT = process.env.PORT || 5000;
