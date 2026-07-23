@@ -2,8 +2,8 @@
   "name": "it21-l-final",
   "private": true,
   "scripts": {
-    "build": "cd cybervault/client && yarn install && yarn build",
-    "start": "cd cybervault/server && yarn install && yarn start"
+    "build": "npm --prefix cybervault/client install && npm --prefix cybervault/client run build",
+    "start": "npm --prefix cybervault/server install && npm --prefix cybervault/server start"
   },
   "engines": {
     "node": ">=18"
