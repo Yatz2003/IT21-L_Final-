@@ -7,11 +7,12 @@ const Dashboard = () => {
   const [status, setStatus] = useState('Checking access...');
   const [agentName, setAgentName] = useState('AGENT');
   const navigate = useNavigate();
+  const apiBase = import.meta.env.VITE_API_BASE_URL || '';
 
   useEffect(() => {
     const fetchStatus = async () => {
       try {
-        const response = await fetch('/api/auth/dashboard', {
+        const response = await fetch(`${apiBase}/api/auth/dashboard`, {
           credentials: 'include',
         });
         const data = await response.json();
@@ -26,10 +27,10 @@ const Dashboard = () => {
       }
     };
     fetchStatus();
-  }, [navigate]);
+  }, [navigate, apiBase]);
 
   const handleLogout = async () => {
-    await fetch('/api/auth/logout', {
+    await fetch(`${apiBase}/api/auth/logout`, {
       method: 'POST',
       credentials: 'include',
     });

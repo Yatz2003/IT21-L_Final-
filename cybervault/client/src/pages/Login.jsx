@@ -8,6 +8,8 @@ const Login = () => {
   const [showLogin, setShowLogin] = useState(false);
   const navigate = useNavigate();
 
+  const apiBase = import.meta.env.VITE_API_BASE_URL || '';
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     setError('');
@@ -18,7 +20,7 @@ const Login = () => {
     }
 
     try {
-      const response = await fetch('/api/auth/login', {
+      const response = await fetch(`${apiBase}/api/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
