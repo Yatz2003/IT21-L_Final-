@@ -6,7 +6,7 @@ const Navbar = () => {
   return (
     <header className="sticky top-0 z-10 border-b border-[#13203a] bg-[#050816]/90 backdrop-blur-lg">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6">
-        <Link to="/" className="text-xs sm:text-sm font-semibold uppercase tracking-[0em] sm:tracking-[0.24em] text-[#00F5FF]">
+        <Link to="/" className="text-[10px] sm:text-sm font-semibold uppercase tracking-[0em] sm:tracking-[0.24em] text-[#00F5FF]">
           CyberVault
         </Link>
         <div className="hidden sm:flex items-center gap-4 text-xs text-[#a8c4dc]">
