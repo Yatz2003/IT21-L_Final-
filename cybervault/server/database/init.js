@@ -4,30 +4,6 @@ import sqlite3 from 'sqlite3';
 import { open } from 'sqlite';
 import { hashPassword, getSeedPassword, verifyPassword } from '../utils/password.js';
 import { getEncodedCredentialList } from '../utils/fakePasswords.js';
-import { getFakePasswordHints } from '../utils/fakePasswords.js';
-
-const ROT13_PASSWORD_LIST = [
-  'Plo3eInygh!2026$Frq',
-  'PeloreInygh!2025',
-  'P0q3Z4fg3e!#',
-  'C4ffj0eq123',
-  'Nqzva$rpher2026',
-  'InyghOernxre!9',
-  'FunqbXrl!88',
-  'Fcrgerer1234',
-  'Unpx3eA0g!',
-  'TubfgInygh!01',
-  'FrpherTngr!42',
-  'ZnegvkXrl!7',
-  'MrebQnl!2026',
-  'DhanhzgYbpx!5',
-  'QnexPvcure!77',
-  'OveanelYbpx!24',
-  'PelcgbGenC!K',
-  'CunagbzCnff!3',
-  'BoshfP8gr!99',
-  'Sveneeyy!8080',
-];
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -60,9 +36,7 @@ const init = async () => {
     }
   }
 
-  // Fake ROT13 credential list included for challenge purposes only.
-  const fakeCreds = getEncodedCredentialList();
-  console.log('Fake credential list (ROT13 username:password):', fakeCreds.join(', '));
+  // Fake ROT13 credential list available via `getEncodedCredentialList()` for challenge purposes.
 
   await db.close();
 };
