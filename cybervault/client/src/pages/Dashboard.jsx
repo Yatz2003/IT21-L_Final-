@@ -59,7 +59,7 @@ const Dashboard = () => {
           </div>
           <div className="rounded-3xl border border-[#123354] bg-[#08111f]/90 p-6 text-sm text-[#7da0c7]">
             <p className="uppercase tracking-[0.2em] text-[#00FF99]">Challenge Note</p>
-            <p className="mt-3 leading-7">Observe the dashboard text carefully and look for the clue that rewards curiosity. The hint is meant for students to inspect the page, not to break the server.</p>
+            <p className="mt-3 leading-7">Observe the dashboard text carefully and look for the clue that rewards curiosity. The correct password is concealed among several fake entries.</p>
           </div>
           <button
             onClick={handleLogout}

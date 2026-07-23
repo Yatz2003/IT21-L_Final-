@@ -63,8 +63,7 @@ CyberVault is an educational challenge built for cybersecurity students. It incl
 
 ## Educational Hint
 
-A subtle hint is included on the dashboard and login page, encouraging students to inspect the page details.
-
+A subtle hint is included on the dashboard and login page, encouraging students to inspect the page details.- The hidden password list is ROT13-encoded; decode all 20 entries to find the correct seed password.
 ## Notes
 
 This project is designed for classroom use. It follows secure development practices and avoids real-world vulnerabilities while still offering a fun challenge.
