@@ -1,5 +1,5 @@
 export const ROT13_PASSWORD_LIST = [
-  'Plo3eInygh!2026$Frq',
+  'Plo3eInygh!2026$Frqq',
   'PeloreInygh!2025',
   'P0q3Z4fg3e!#',
   'C4ffj0eq123',

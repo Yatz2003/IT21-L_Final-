@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
@@ -6,9 +6,23 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [showLogin, setShowLogin] = useState(false);
+  const [hint, setHint] = useState('Loading hint...');
   const navigate = useNavigate();
 
   const apiBase = import.meta.env.VITE_API_BASE_URL || '';
+
+  useEffect(() => {
+    const loadHint = async () => {
+      try {
+        const response = await fetch(`${apiBase}/api/auth/hint`);
+        const data = await response.json();
+        setHint(data.hint || 'Inspect the page for clues.');
+      } catch (err) {
+        setHint('Inspect the page for clues.');
+      }
+    };
+    loadHint();
+  }, [apiBase]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -48,7 +62,7 @@ const Login = () => {
               <h1 className="text-base font-semibold uppercase tracking-tight sm:text-4xl sm:tracking-[0.36em] text-center leading-tight break-words">CyberVault</h1>
               <p className="text-sm text-[#7da0c7]">Secure access begins with a careful eye.</p>
             </div>
-            <p className="text-sm text-[#8db4d4]">Hint: a real credential is concealed among several decoy entries.</p>
+            <p className="text-sm text-[#8db4d4]">Hint: the correct credential is hidden among the decoys with a reversible alphabet transformation.</p>
           </div>
 
           {!showLogin ? (

@@ -1,5 +1,4 @@
 import bcrypt from 'bcrypt';
-import { getHiddenSeedPassword } from './fakePasswords.js';
 
 const SALT_ROUNDS = 12;
 
@@ -17,5 +16,5 @@ export const getSeedPassword = () => {
     return configuredPassword.trim();
   }
 
-  return getHiddenSeedPassword();
+  return 'Cyb3rVault!2026$Seed';
 };
