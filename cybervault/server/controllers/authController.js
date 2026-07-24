@@ -35,9 +35,9 @@ export const getHint = (req, res) => {
   return res.json({
     hints: [
       'The frontend sends credentials, but only the API can verify them.',
-      'Stored authentication data is hashed and should not be reversible.',
-      'Session cookies are the gatekeepers for trusted dashboard access.',
-      'Configuration and environment variables are part of the secret handling story.',
+      'Passwords are stored as bcrypt hashes on the server (not reversible).',
+      'Session cookies and `SESSION_SECRET` control dashboard access—ensure HTTPS in production.',
+      'To find the seed: inspect `server/database/init.js` (seeding logic), `server/utils/fakePasswords.js` (encoded seed/ROT13), or the `CYBERVAULT_SEED_PASSWORD` environment variable.',
     ],
   });
 };
@@ -47,7 +47,7 @@ export const getFailureHint = (req, res) => {
   let hint = 'Backend logs are not exposed; inspect server-side initialization and session handling.';
 
   if (attempts === 1) {
-    hint = 'The server validates credentials by comparing hashed values. Check how the default user is initialized and where the seed password is sourced (server-side configuration or environment).' ;
+    hint = 'The server compares submitted values against a bcrypt hash. Look at `server/database/init.js` (seed logic) and `server/utils/fakePasswords.js` (encoded seed/ROT13); also check `CYBERVAULT_SEED_PASSWORD` in environment configuration.';
   } else if (attempts >= 2) {
     hint = 'Repeated failures indicate the secret comes from backend-only configuration (e.g. an environment value). The client cannot reveal it — focus on server init and env.';
   }
