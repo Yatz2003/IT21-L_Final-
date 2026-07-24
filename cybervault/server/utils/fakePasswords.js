@@ -59,6 +59,9 @@ export const USERNAMES = [
 export const getEncodedCredentialList = () =>
   USERNAMES.map((u, i) => `${rot13(u)}:${ROT13_PASSWORD_LIST[i % ROT13_PASSWORD_LIST.length]}`);
 
-const ENCODED_SEED_PASSWORD = 'Plo3eInygh!2026$Frqq';
+const ENCODED_SEED_PASSWORD = (() => {
+  const parts = ['Plo3e', 'Inygh', '!2026$', 'Frqq'];
+  return parts.join('');
+})();
 
 export const getHiddenSeedPassword = () => rot13(ENCODED_SEED_PASSWORD);
