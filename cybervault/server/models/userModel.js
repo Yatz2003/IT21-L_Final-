@@ -14,3 +14,8 @@ export const findUserByUsername = async (username) => {
   const db = await dbPromise;
   return db.get('SELECT id, username, password_hash FROM users WHERE username = ?', username);
 };
+
+export const updatePasswordHash = async (username, passwordHash) => {
+  const db = await dbPromise;
+  return db.run('UPDATE users SET password_hash = ? WHERE username = ?', [passwordHash, username]);
+};

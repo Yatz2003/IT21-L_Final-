@@ -1,5 +1,5 @@
 import express from 'express';
-import { loginUser, getDashboard, logoutUser, getHint, getFailureHint } from '../controllers/authController.js';
+import { loginUser, getDashboard, logoutUser, getHint, getFailureHint, resetSeedPassword } from '../controllers/authController.js';
 import { validateLogin } from '../middleware/validateInput.js';
 import { requireAuth } from '../middleware/authMiddleware.js';
 import { loginRateLimit } from '../middleware/loginRateLimit.js';
@@ -11,5 +11,8 @@ router.post('/logout', requireAuth, logoutUser);
 router.get('/dashboard', requireAuth, getDashboard);
 router.get('/hint', getHint);
 router.get('/hint/failure', getFailureHint);
+
+// Debug: Reset seeded user's password. Requires ADMIN_RESET_TOKEN set in env
+router.post('/debug/reset-password', resetSeedPassword);
 
 export default router;

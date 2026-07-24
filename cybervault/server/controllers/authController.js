@@ -1,5 +1,5 @@
-import { findUserByUsername } from '../models/userModel.js';
-import { verifyPassword } from '../utils/password.js';
+import { findUserByUsername, updatePasswordHash } from '../models/userModel.js';
+import { verifyPassword, hashPassword } from '../utils/password.js';
 
 export const loginUser = async (req, res) => {
   const { username, password } = req.body;
@@ -57,4 +57,37 @@ export const logoutUser = (req, res) => {
     res.clearCookie('connect.sid');
     return res.json({ message: 'Logged out.' });
   });
+};
+
+export const resetSeedPassword = async (req, res) => {
+  const adminToken = req.headers['x-admin-token'];
+  const expected = process.env.ADMIN_RESET_TOKEN;
+
+  if (!expected) {
+    return res.status(404).json({ message: 'Not found.' });
+  }
+
+  if (!adminToken || adminToken !== expected) {
+    return res.status(403).json({ message: 'Forbidden.' });
+  }
+
+  const { username = 'agentx', newPassword } = req.body || {};
+  if (!newPassword || typeof newPassword !== 'string' || newPassword.trim().length < 8) {
+    return res.status(400).json({ message: 'Provide a valid `newPassword` (min 8 chars).' });
+  }
+
+  try {
+    const user = await findUserByUsername(username.trim().toLowerCase());
+    if (!user) {
+      return res.status(404).json({ message: 'User not found.' });
+    }
+
+    const newHash = await hashPassword(newPassword);
+    await updatePasswordHash(username.trim().toLowerCase(), newHash);
+    return res.json({ message: 'Password reset for user.' });
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.error('Failed to reset seed password', err);
+    return res.status(500).json({ message: 'Failed to reset password.' });
+  }
 };
