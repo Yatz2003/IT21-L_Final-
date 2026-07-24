@@ -59,7 +59,7 @@ const Dashboard = () => {
           </div>
           <div className="rounded-3xl border border-[#123354] bg-[#08111f]/90 p-6 text-sm text-[#7da0c7]">
             <p className="uppercase tracking-[0.2em] text-[#00FF99]">Challenge Note</p>
-            <p className="mt-3 leading-7">Observe the dashboard text carefully and look for the clue that rewards curiosity. The correct credential is hidden among decoys and uses the alphabet's midpoint as its key.</p>
+            <p className="mt-3 leading-7">This page is gated by server-side session validation. The real secret is not stored in the client, and the challenge is to follow the request path, the hashed credentials, and the environment that supplies the seed.</p>
           </div>
           <button
             onClick={handleLogout}

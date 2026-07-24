@@ -6,22 +6,22 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [showLogin, setShowLogin] = useState(false);
-  const [hint, setHint] = useState('Loading hint...');
+  const [hints, setHints] = useState(['Loading challenge hints...']);
   const navigate = useNavigate();
 
   const apiBase = import.meta.env.VITE_API_BASE_URL || '';
 
   useEffect(() => {
-    const loadHint = async () => {
+    const loadHints = async () => {
       try {
         const response = await fetch(`${apiBase}/api/auth/hint`);
         const data = await response.json();
-        setHint(data.hint || 'Inspect the page for clues.');
+        setHints(data.hints || ['Inspect the request flow and the server-side validation.']);
       } catch (err) {
-        setHint('Inspect the page for clues.');
+        setHints(['Inspect the request flow and the server-side validation.']);
       }
     };
-    loadHint();
+    loadHints();
   }, [apiBase]);
 
   const handleSubmit = async (event) => {
@@ -46,6 +46,17 @@ const Login = () => {
         navigate('/dashboard');
       } else {
         setError(data.message || 'Login failed.');
+        try {
+          const failureResponse = await fetch(`${apiBase}/api/auth/hint/failure`, {
+            credentials: 'include',
+          });
+          const failureData = await failureResponse.json();
+          if (failureData.hint) {
+            setHints((prev) => [...prev, failureData.hint]);
+          }
+        } catch {
+          // keep existing hints if failure hint is unavailable
+        }
       }
     } catch (err) {
       setError('Unable to connect to the server.');
@@ -62,7 +73,14 @@ const Login = () => {
               <h1 className="text-base font-semibold uppercase tracking-tight sm:text-4xl sm:tracking-[0.36em] text-center leading-tight break-words">CyberVault</h1>
               <p className="text-sm text-[#7da0c7]">Secure access begins with a careful eye.</p>
             </div>
-            <p className="text-sm text-[#8db4d4]">Hint: the correct credential is hidden among the decoys with a reversible alphabet transformation.</p>
+            <div className="space-y-2 text-[#8db4d4]">
+              <p className="text-sm">Challenge hints:</p>
+              <ul className="list-disc list-inside space-y-1 text-xs">
+                {hints.map((hintItem, index) => (
+                  <li key={index}>{hintItem}</li>
+                ))}
+              </ul>
+            </div>
           </div>
 
           {!showLogin ? (

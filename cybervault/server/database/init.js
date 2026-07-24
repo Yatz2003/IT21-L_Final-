@@ -3,7 +3,6 @@ import { fileURLToPath } from 'url';
 import sqlite3 from 'sqlite3';
 import { open } from 'sqlite';
 import { hashPassword, getSeedPassword, verifyPassword } from '../utils/password.js';
-import { getEncodedCredentialList } from '../utils/fakePasswords.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

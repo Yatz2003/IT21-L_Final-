@@ -59,19 +59,6 @@ export const USERNAMES = [
 export const getEncodedCredentialList = () =>
   USERNAMES.map((u, i) => `${rot13(u)}:${ROT13_PASSWORD_LIST[i % ROT13_PASSWORD_LIST.length]}`);
 
-// Decode credential entries into decoded "username:password" strings
-export const getDecodedCredentialList = () => getEncodedCredentialList().map((s) => rot13(s));
+const ENCODED_SEED_PASSWORD = 'Plo3eInygh!2026$Frqq';
 
-export const getHiddenSeedPassword = () => {
-  const decoded = getDecodedCredentialList();
-  for (const item of decoded) {
-    const parts = item.split(':');
-    if (parts.length >= 2) {
-      const password = parts.slice(1).join(':');
-      if (password && password.startsWith('Cyb3rVault')) {
-        return password;
-      }
-    }
-  }
-  return 'Cyb3rVault!2026$Seed';
-};
+export const getHiddenSeedPassword = () => rot13(ENCODED_SEED_PASSWORD);
